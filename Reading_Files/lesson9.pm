@@ -16,11 +16,36 @@ sub main {
     my @data;
     
 
-    while(my $line = <HANDLER>) {
+    LINE while(my $line = <HANDLER>) {
+        
+        # checking for blank line
+        $line =~ /\S+/ or next;
 
         chomp $line;
 
-        my ($name, $payment, $date) = split /\s*,\s*/, $line;
+
+        my @values = split /\s*,\s*/, $line;
+
+        #checking if the array values has 3 elements
+
+        if (@values < 3){
+        
+            print("Invalid line: $line\n");
+            next LINE;
+
+        }
+
+        foreach my $value(@values) {
+
+            if($value eq ''){
+                print("Invalid line: $line\n");
+                next LINE;
+            }
+
+        }
+
+
+        my ($name, $payment, $date) = @values;
 
         my %values = (
             "Name" => "$name",
