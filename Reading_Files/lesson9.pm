@@ -16,8 +16,9 @@ sub main {
     my @data;
     
 
-    LINE while(my $line = <HANDLER>) {
-        
+    LINE: while(my $line = <HANDLER>) {
+        # checking for spaces at the beginning of the line
+        $line =~ s/^\s*//;
         # checking for blank line
         $line =~ /\S+/ or next;
 
