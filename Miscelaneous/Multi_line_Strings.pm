@@ -12,9 +12,17 @@ sub main {
     # Get command line options
     getopts('af:c', \%opts);
 
-    if(!checkusage("Hello", 7)) {
+    if(!checkusage(\%opts)) {
         usage();
     }
+
+    my $opts_ref = \%opts;
+
+    # Use hash directly
+    print($opts{"f"} . "\n");
+
+    # Use reference to hash
+    print($opts_ref->{"f"} . "\n");
 }
 
 sub checkusage {
